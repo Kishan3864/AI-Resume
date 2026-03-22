@@ -1,21 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import tailwindcss from '@tailwindcss/vite';
-import compression from 'vite-plugin-compression';
 import path from 'path';
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    compression({
-      algorithm: 'gzip',
-      threshold: 1024,
-    }),
-    compression({
-      algorithm: 'brotliCompress',
-      threshold: 1024,
-    }),
   ],
   resolve: {
     alias: {
@@ -33,24 +24,6 @@ export default defineConfig({
   },
   build: {
     target: 'es2020',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
-          'ui-vendor': ['framer-motion', 'lucide-react'],
-          'pdf-vendor': ['jspdf', 'html2canvas', 'react-to-print'],
-          'dnd-vendor': ['@dnd-kit/core', '@dnd-kit/sortable'],
-        },
-      },
-    },
     chunkSizeWarningLimit: 500,
     sourcemap: false,
     cssMinify: true,

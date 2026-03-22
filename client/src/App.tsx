@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 
 // Lazy-loaded pages for code splitting
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -16,6 +18,7 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
+const DisclaimerPage = lazy(() => import('./pages/DisclaimerPage'));
 const FAQPage = lazy(() => import('./pages/FAQPage'));
 const ResumeExamplesPage = lazy(() => import('./pages/ResumeExamplesPage'));
 const CoverLetterPage = lazy(() => import('./pages/CoverLetterPage'));
@@ -34,34 +37,41 @@ function LoadingSpinner() {
 
 export default function App() {
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <Routes>
-        {/* Public Pages */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/templates" element={<TemplatesPage />} />
-        <Route path="/ai-analyzer" element={<AIAnalyzerPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/resume-examples" element={<ResumeExamplesPage />} />
-        <Route path="/cover-letter-builder" element={<CoverLetterPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPage />} />
-        <Route path="/terms-of-service" element={<TermsPage />} />
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1">
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            {/* Public Pages */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/templates" element={<TemplatesPage />} />
+            <Route path="/ai-analyzer" element={<AIAnalyzerPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/resume-examples" element={<ResumeExamplesPage />} />
+            <Route path="/cover-letter-builder" element={<CoverLetterPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPage />} />
+            <Route path="/terms-of-service" element={<TermsPage />} />
+            <Route path="/disclaimer" element={<DisclaimerPage />} />
 
-        {/* Auth Pages */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+            {/* Auth Pages */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-        {/* Protected Pages */}
-        <Route path="/builder" element={<BuilderPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+            {/* Protected Pages */}
+            <Route path="/builder" element={<BuilderPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
 
-        {/* 404 */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Suspense>
+            {/* 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
+    </div>
   );
 }
