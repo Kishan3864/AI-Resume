@@ -1,0 +1,23 @@
+{
+  "name": "resume-ai",
+  "version": "1.0.0",
+  "description": "World's Most Advanced AI-Powered Resume Builder",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "install:all": "cd client && npm install && cd ../server && npm install",
+    "lint": "cd client && npm run lint && cd ../server && npm run lint",
+    "test": "cd client && npm test && cd ../server && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
